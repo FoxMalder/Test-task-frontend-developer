@@ -13,13 +13,8 @@ function App() {
         { caption: "Фамилия", name: "lastName", isAscending: undefined },
         { caption: "Email", name: "email", isAscending: undefined },
         { caption: "Телефон", name: "phone", isAscending: undefined },
-<<<<<<< HEAD
         // { caption: "Адрес", name: "adress", isAscending: undefined },
         // { caption: "Описание", name: "description", isAscending: undefined },
-=======
-        { caption: "Адрес", name: "adress", isAscending: undefined },
-        { caption: "Описание", name: "description", isAscending: undefined },
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
     ]);
 
     function setHeaderFill(name, isAscending) {
@@ -34,10 +29,7 @@ function App() {
     }
 
     function sortByFill(fill, isAscending) {
-<<<<<<< HEAD
         
-=======
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
         setColumnHeaders(
             columnHeaders.map((item) => {
                 if (item.name !== fill) {
@@ -46,13 +38,9 @@ function App() {
                 return item;
             })
         );
-<<<<<<< HEAD
 
         const sorted = [...tableRows];
         sorted.sort((a, b) => {
-=======
-        const sorted = [].slice.call(tableRows).sort((a, b) => {
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
             if (isAscending) {
                 setHeaderFill(fill, false);
                 return a[fill] > b[fill] ? -1 : 1;
@@ -80,7 +68,6 @@ function App() {
         setErrorText(error.toString());
     }
 
-<<<<<<< HEAD
     function addNewItem() {
         console.log("goga");
         const new_object = {
@@ -95,8 +82,6 @@ function App() {
         setTableRows(new_array);
     }
 
-=======
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
     useEffect(() => {
         fetch(queryURL)
             .then((res) => res.json())
@@ -122,7 +107,6 @@ function App() {
         // Нормальная работа
         return (
             <div className="wrapper">
-<<<<<<< HEAD
                 <div className="wrapper__header">
                     <h1>Таблица</h1>
                     <button
@@ -132,9 +116,6 @@ function App() {
                         + Новый элемент
                     </button>
                 </div>
-=======
-                <h1>Таблица</h1>
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
                 <TableWrapper
                     tableRows={tableRows}
                     onClick={sortByFill}

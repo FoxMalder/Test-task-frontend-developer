@@ -18,7 +18,6 @@ code {
 .wrapper {
   padding: 20px;
   margin: 0 auto;
-<<<<<<< HEAD
   max-width: 1040px;
 }
 
@@ -45,20 +44,13 @@ code {
 
 .wrapper__header__add-button:hover {
   color: black;
-=======
-  width: 1000px;
-  padding-bottom: 5rem;
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
 }
 
 .wrapper .table {
   border-top: 1px solid lightgray;
   border-right: 1px solid lightgray;
   border-spacing: 0px;
-<<<<<<< HEAD
   width: 100%;
-=======
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
 }
 
 .wrapper .table-body tr:nth-child(2n) {
