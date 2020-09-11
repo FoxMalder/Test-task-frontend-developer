@@ -1,0 +1,43 @@
+body
+  margin: 0
+  font-family: 'Segoe UI', sans-serif
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  font-size: 12pt
+
+code 
+  font-family: source-code-pro, Menlo, Monaco, Consolas,'Courier New', monospace
+
+*
+    box-sizing: border-box
+
+$table-border-color: lightgray
+    
+.wrapper
+    padding-top: 5rem
+    margin: 0 auto
+    width: 1600px
+
+    .table 
+        border-top: 1px solid $table-border-color
+        border-right: 1px solid $table-border-color
+        border-spacing: 0px
+
+    .table-body 
+        tr
+            &:hover
+                background: #f6f8fa88
+
+            &:nth-child(2n)
+                background: #F6F8FA
+
+                &:hover
+                    background: #f6f8fa88
+                
+
+    td, th
+        margin: 0
+        padding: 5px 10px
+        border: 1px solid $table-border-color
+        border-top: none
+        border-right: none
