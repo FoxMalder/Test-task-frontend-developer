@@ -14,7 +14,11 @@ function TableWrapper(props) {
                                     props.onClick(item.name, item.isAscending)
                                 }
                             >
+<<<<<<< HEAD
                                 {`${item.caption} ${
+=======
+                                {`${item.caption} ${
+>>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
                                     item.isAscending
                                         ? "▲"
                                         : item.isAscending === undefined
