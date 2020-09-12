@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import TableWrapper from "./Table/TableWrapper";
 import ItemShowForm from "./Item Info/ItemShowForm";
+import LoadingIndicator from "./Loading/LoadingIndicator";
 
 function App() {
-    const queryURL = `http://www.filltext.com/?rows=10&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D`;
+    const queryURL = `http://www.filltext.com/?rows=1000&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D`;
     const [tableRows, setTableRows] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
+    const [sortLoading, setSortLoading] = React.useState(false);
     const [error, setError] = React.useState(false);
     const [errorText, setErrorText] = React.useState("");
     const [activeItem, setActiveItem] = React.useState(undefined);
@@ -37,26 +39,29 @@ function App() {
     //    fill — поле, по которому будет произведена сортировка
     //    isAscending — тип сортировки (true — по возрастанию, false — по убыванию)
     function sortByFill(fill, isAscending) {
-        setColumnHeaders(
-            columnHeaders.map((item) => {
-                if (item.name !== fill) {
-                    item.isAscending = undefined;
-                }
-                return item;
-            })
-        );
+            setSortLoading(true);
 
-        const sorted = [...tableRows];
-        sorted.sort((a, b) => {
-            if (isAscending) {
-                setHeaderFill(fill, false);
-                return a[fill] > b[fill] ? -1 : 1;
-            } else {
-                setHeaderFill(fill, true);
-                return a[fill] > b[fill] ? 1 : -1;
-            }
-        });
-        setTableRows(sorted);
+            setColumnHeaders(
+                columnHeaders.map((item) => {
+                    if (item.name !== fill) {
+                        item.isAscending = undefined;
+                    }
+                    return item;
+                })
+            );
+
+            const sorted = [...tableRows];
+            sorted.sort((a, b) => {
+                if (isAscending) {
+                    setHeaderFill(fill, false);
+                    return a[fill] > b[fill] ? -1 : 1;
+                } else {
+                    setHeaderFill(fill, true);
+                    return a[fill] > b[fill] ? 1 : -1;
+                }
+            });
+            setTableRows(sorted);
+            setSortLoading(false);
     }
 
     // Функция при удачном обращении к серверу
@@ -96,48 +101,34 @@ function App() {
             .then(getDataSucess, getDataFail);
     }, [queryURL]);
 
-    if (loading) {
-        // Загрузка
-        return (
-            <div className="wrapper">
-                <h1>Загрузка...</h1>
-            </div>
-        );
-    } else if (error) {
-        // Ошибка
-        return (
-            <div className="wrapper">
-                <h1> Ошибка </h1>
-                <p> {errorText} </p>
-            </div>
-        );
-    } else {
-        // Нормальная работа
-        return (
-            <div className="wrapper">
-                <div className="wrapper__header">
+    return (
+        <div className="wrapper">
+            <div className="wrapper__header">
+                <div className="flex">
                     <h1>Таблица</h1>
-                    <button
-                        className="wrapper__header__add-button"
-                        onClick={() => addNewItem()}
-                    >
-                        + Новый элемент
-                    </button>
+                    <LoadingIndicator isLoading={loading || sortLoading} />
                 </div>
-                <TableWrapper
-                    tableRows={tableRows}
-                    columnHeaders={columnHeaders}
-                    onHeaderClick={sortByFill}
-                    onRowClick={setActiveItem}
-                />
-                <ItemShowForm
-                    row={tableRows}
-                    activeItem={activeItem}
-                    caption={"Информация об записи"}
-                ></ItemShowForm>
+                <button
+                    className="wrapper__header__add-button"
+                    onClick={() => addNewItem()}
+                >
+                    + Новый элемент
+                </button>
             </div>
-        );
-    }
+            <TableWrapper
+                isLoading={loading}
+                tableRows={tableRows}
+                columnHeaders={columnHeaders}
+                onHeaderClick={sortByFill}
+                onRowClick={setActiveItem}
+            />
+            <ItemShowForm
+                row={tableRows}
+                activeItem={activeItem}
+                caption={"Информация об записи"}
+            />
+        </div>
+    );
 }
 
 export default App;

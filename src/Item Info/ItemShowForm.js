@@ -2,7 +2,7 @@ import React from "react";
 
 function ItemShowForm(props) {
     try {
-        if (props.activeItem === undefined) throw "No active element selected"
+        if (props.activeItem === undefined) throw new Error('No active items selected!');
         let selectedRow = props.row[props.activeItem];
         return (
             <div className="showing-form">
@@ -32,7 +32,6 @@ function ItemShowForm(props) {
             </div>
         );
     } catch (e) {
-        console.log(e);
         return null;
     }
 }

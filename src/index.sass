@@ -13,6 +13,21 @@ body
     @include default-font
     margin: 0
 
+@keyframes loading 
+    0%
+        transform: rotate(0deg)
+
+    100%
+        transform: rotate(360deg)
+
+.flex
+    display: flex
+    align-items: baseline
+
+.loading-indicator
+    padding: 15px
+    animation: loading 1s linear infinite
+
     
 .wrapper
     padding: 20px
@@ -66,7 +81,7 @@ body
 
     .table-body 
         tr:nth-child(2n)
-            background: #f6f8fa88
+            background: #F8F8F8
 
         tr
             &:hover
