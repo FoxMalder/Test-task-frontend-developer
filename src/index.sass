@@ -1,0 +1,31 @@
+$table-border-color: #DFE2E5
+$table-odd-row-color: #F6F8FA
+
+@mixin table-fill
+    border-top: 1px solid $table-border-color
+    border-right: 1px solid $table-border-color
+    padding: 5px 10px
+    
+    
+.wrapper
+    max-width: 1040px
+    margin: 0 auto
+    padding: 20px
+
+    .table
+        border-spacing: 0
+        border-left: 1px solid $table-border-color
+        border-bottom: 1px solid $table-border-color
+
+        &__head
+            &__row
+                &__fill
+                    @include table-fill
+
+        &__body
+            &__row
+                &:nth-child(2n)
+                    background: $table-odd-row-color
+
+                &__fill
+                    @include table-fill

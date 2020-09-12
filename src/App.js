@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import TableWrapper from "./Table/TableWrapper";
-import ItemShowForm from "./Item Info/ItemShowForm";
-import LoadingIndicator from "./Loading/LoadingIndicator";
 
 function App() {
     return (
-        <h1>Hello!</h1>
-    )
+        <div className="wrapper">
+            <h1>Таблица</h1>
+            <TableWrapper />
+        </div>
+    );
 }
 
 export default App;
