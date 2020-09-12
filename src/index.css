@@ -1,18 +1,14 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 12pt;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas,'Courier New', monospace;
-}
-
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12pt;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
 }
 
 .wrapper {
@@ -46,6 +42,31 @@ code {
   color: black;
 }
 
+.wrapper .showing-form__header {
+  margin-bottom: 0;
+}
+
+.wrapper .showing-form__data__fill {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.wrapper .showing-form__data__fill__textarea {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 12pt;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+  max-width: 100%;
+  width: 800px;
+  height: 100px;
+  resize: vertical;
+  padding: 10px;
+}
+
 .wrapper .table {
   border-top: 1px solid lightgray;
   border-right: 1px solid lightgray;
@@ -57,6 +78,11 @@ code {
   background: #f6f8fa88;
 }
 
+.wrapper .table-body tr:hover {
+  cursor: pointer;
+  background: #c4c4c488;
+}
+
 .wrapper td, .wrapper th {
   margin: 0;
   padding: 5px 10px;
@@ -64,14 +90,6 @@ code {
   border-top: none;
   border-right: none;
   text-align-last: left;
-}
-
-.wrapper th {
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  cursor: pointer;
 }
 
 .wrapper th {

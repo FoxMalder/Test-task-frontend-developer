@@ -1,17 +1,18 @@
-body
-  margin: 0
-  font-family: 'Segoe UI', sans-serif
-  -webkit-font-smoothing: antialiased
-  -moz-osx-font-smoothing: grayscale
-  font-size: 12pt
+$table-border-color: lightgray
 
-code 
-  font-family: source-code-pro, Menlo, Monaco, Consolas,'Courier New', monospace
+@mixin default-font
+    font-family: 'Segoe UI', sans-serif
+    font-size: 12pt
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
 
 *
     box-sizing: border-box
+    
+body
+    @include default-font
+    margin: 0
 
-$table-border-color: lightgray
     
 .wrapper
     padding: 20px
@@ -34,6 +35,28 @@ $table-border-color: lightgray
             &:hover
                 color: black
 
+    .showing-form
+        &__header
+            margin-bottom: 0
+
+        &__data
+            &__fill
+                width: 100%
+                padding: 0
+                margin: 0
+                margin-top: 5px
+
+                &__textarea
+                    @include default-font
+                    padding: 0
+                    margin: 0
+                    max-width: 100%
+                    width: 800px
+                    height: 100px
+                    resize: vertical
+                    padding: 10px
+
+
 
     .table 
         border-top: 1px solid $table-border-color
@@ -44,6 +67,11 @@ $table-border-color: lightgray
     .table-body 
         tr:nth-child(2n)
             background: #f6f8fa88
+
+        tr
+            &:hover
+                cursor: pointer
+                background: #c4c4c488
                 
 
     td, th
@@ -52,10 +80,7 @@ $table-border-color: lightgray
         border: 1px solid $table-border-color
         border-top: none
         border-right: none
-<<<<<<< HEAD
         text-align-last: left
-=======
->>>>>>> 2f85999acd0915d69c5f804df1bc441e320bfc3f
 
     th 
         user-select: none

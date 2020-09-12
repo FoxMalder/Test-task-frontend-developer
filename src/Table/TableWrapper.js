@@ -11,7 +11,10 @@ function TableWrapper(props) {
                             <th
                                 key={index}
                                 onClick={() =>
-                                    props.onClick(item.name, item.isAscending)
+                                    props.onHeaderClick(
+                                        item.name,
+                                        item.isAscending
+                                    )
                                 }
                             >
                                 {`${item.caption} ${
@@ -27,8 +30,15 @@ function TableWrapper(props) {
                 </tr>
             </thead>
             <tbody className="table-body">
-                {props.tableRows.map(function (row, index) {
-                    return <TableItem row={row} key={index} />;
+                {props.tableRows.map((row, index) => {
+                    return (
+                        <TableItem
+                            row={row}
+                            key={index}
+                            rowKey={index}
+                            onRowClick={props.onRowClick}
+                        />
+                    );
                 })}
             </tbody>
             <tfoot></tfoot>

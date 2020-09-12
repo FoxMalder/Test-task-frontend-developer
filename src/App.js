@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import TableWrapper from "./Table/TableWrapper";
+import ItemShowForm from "./Item Info/ItemShowForm";
 
 function App() {
     const queryURL = `http://www.filltext.com/?rows=10&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D`;
@@ -7,6 +8,7 @@ function App() {
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(false);
     const [errorText, setErrorText] = React.useState("");
+    const [activeItem, setActiveItem] = React.useState(undefined);
     const [columnHeaders, setColumnHeaders] = React.useState([
         { caption: "ID", name: "id", isAscending: undefined },
         { caption: "Имя", name: "firstName", isAscending: undefined },
@@ -17,6 +19,9 @@ function App() {
         // { caption: "Описание", name: "description", isAscending: undefined },
     ]);
 
+    // Установка свойств сортировки
+    //     name — уникальное имя столбца
+    //     isAscending — тип сортировки (true — по возрастанию, false — по убыванию)
     function setHeaderFill(name, isAscending) {
         setColumnHeaders(
             columnHeaders.map((item) => {
@@ -28,8 +33,10 @@ function App() {
         );
     }
 
+    // Сортировка столбца по выбранному полю
+    //    fill — поле, по которому будет произведена сортировка
+    //    isAscending — тип сортировки (true — по возрастанию, false — по убыванию)
     function sortByFill(fill, isAscending) {
-        
         setColumnHeaders(
             columnHeaders.map((item) => {
                 if (item.name !== fill) {
@@ -52,22 +59,22 @@ function App() {
         setTableRows(sorted);
     }
 
+    // Функция при удачном обращении к серверу
+    //     result — полученные данные с сервера
     function getDataSucess(result) {
+        setTableRows([...result]);
         setLoading(false);
-        setTableRows(
-            result.map((item) => {
-                item.adress = `${item.address.state}, ${item.address.city}, ${item.address.streetAddress}, ${item.address.zip}`;
-                return item;
-            })
-        );
     }
 
+    // Функция при неудачном обращении к серверу
+    //     error — ошибка, возвращаемая при неудачном запросе
     function getDataFail(error) {
         setLoading(false);
         setError(true);
         setErrorText(error.toString());
     }
 
+    // Добавление нового элемента в таблицу
     function addNewItem() {
         console.log("goga");
         const new_object = {
@@ -82,6 +89,7 @@ function App() {
         setTableRows(new_array);
     }
 
+    // Получение данных с сервера
     useEffect(() => {
         fetch(queryURL)
             .then((res) => res.json())
@@ -118,9 +126,15 @@ function App() {
                 </div>
                 <TableWrapper
                     tableRows={tableRows}
-                    onClick={sortByFill}
                     columnHeaders={columnHeaders}
+                    onHeaderClick={sortByFill}
+                    onRowClick={setActiveItem}
                 />
+                <ItemShowForm
+                    row={tableRows}
+                    activeItem={activeItem}
+                    caption={"Информация об записи"}
+                ></ItemShowForm>
             </div>
         );
     }
