@@ -72,9 +72,10 @@ class AddNewRow extends React.Component {
                 <div className="add-wrapper">
                     <button
                         className="add-wrapper__open-button"
-                        onClick={() =>
-                            this.setState({ isOpened: !this.state.isOpened })
-                        }
+                        onClick={() => {
+                            this.setState({ isOpened: !this.state.isOpened });
+                            this.setState(this.defaultValue);
+                        }}
                     >
                         × Отмена
                     </button>
