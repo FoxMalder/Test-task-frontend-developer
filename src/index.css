@@ -11,40 +11,141 @@
   padding: 20px;
 }
 
-.wrapper .header {
+.wrapper__header {
+  margin: 0;
+}
+
+.wrapper .add-wrapper {
+  margin-bottom: 20px;
+}
+
+.wrapper .add-wrapper__open-button {
+  padding: 0;
+  margin-bottom: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  outline: none;
+}
+
+.wrapper .add-wrapper__open-button:hover {
+  color: black;
+}
+
+.wrapper .add-wrapper__open-button--is-not-opened {
+  padding: 0;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  outline: none;
+}
+
+.wrapper .add-wrapper__open-button--is-not-opened:hover {
+  color: black;
+}
+
+.wrapper .add-wrapper__form {
+  width: 100%;
+  text-align: right;
+}
+
+.wrapper .add-wrapper__form__parameters {
+  border: none;
+  border-left: 1px solid #DFE2E5;
+  border-bottom: 1px solid #DFE2E5;
+}
+
+.wrapper .add-wrapper__form__parameters__headers-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
 }
 
-.wrapper .header__add-container input {
-  display: inline-block;
-  width: 20%;
+.wrapper .add-wrapper__form__parameters__headers-wrapper__header {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  border-top: 1px solid #DFE2E5;
+  border-right: 1px solid #DFE2E5;
+  padding: 5px 10px;
+  text-align: left;
+  font-weight: bold;
+  width: 100%;
 }
 
-.wrapper .header__add-container__add-button {
+.wrapper .add-wrapper__form__parameters__fills-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+}
+
+.wrapper .add-wrapper__form__parameters__fills-wrapper__fill {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12pt;
-  padding-top: 40px;
-  background: none;
-  border: none;
   outline: none;
-  cursor: pointer;
-  color: gray;
-  margin-bottom: 15px;
+  border: none;
+  border-top: 1px solid #DFE2E5;
+  border-right: 1px solid #DFE2E5;
+  padding: 5px 10px;
+  text-align: left;
+  width: 100%;
 }
 
-.wrapper .header__add-container__add-button:hover {
+.wrapper .add-wrapper__form__buttons-wrapper__clear-button {
+  padding: 0;
+  margin-top: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  outline: none;
+  margin-right: 30px;
+}
+
+.wrapper .add-wrapper__form__buttons-wrapper__clear-button:hover {
+  color: #e60000;
+}
+
+.wrapper .add-wrapper__form__buttons-wrapper__add-button {
+  padding: 0;
+  margin-top: 10px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: gray;
+  outline: none;
+}
+
+.wrapper .add-wrapper__form__buttons-wrapper__add-button:hover {
   color: black;
 }
 
 .wrapper .table {
+  margin-bottom: 20px;
   width: 100%;
   border-spacing: 0;
   border-left: 1px solid #DFE2E5;
@@ -52,6 +153,8 @@
 }
 
 .wrapper .table__head__row__fill {
+  outline: none;
+  border: none;
   border-top: 1px solid #DFE2E5;
   border-right: 1px solid #DFE2E5;
   padding: 5px 10px;
@@ -76,6 +179,8 @@
 }
 
 .wrapper .table__body__row__fill {
+  outline: none;
+  border: none;
   border-top: 1px solid #DFE2E5;
   border-right: 1px solid #DFE2E5;
   padding: 5px 10px;
@@ -83,7 +188,7 @@
 }
 
 .wrapper .information {
-  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .wrapper .information__fill {
@@ -97,6 +202,9 @@
 }
 
 .wrapper .information__fills-wrapper__textarea {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  border: 1px solid #DFE2E5;
   width: 100%;
   max-width: 800px;
   height: 100px;
