@@ -1,18 +1,53 @@
-$table-border-color: #DFE2E5
-$table-odd-row-color: #F6F8FA
+@mixin font
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-size: 12pt
 
-@mixin table-fill
-    border-top: 1px solid $table-border-color
-    border-right: 1px solid $table-border-color
-    padding: 5px 10px
-    
+*
+    box-sizing: border-box
     
 .wrapper
+    @include font
+
     max-width: 1040px
     margin: 0 auto
     padding: 20px
 
+    .header
+        display: flex
+        align-items: flex-start
+        justify-content: space-between
+
+        &__add-container
+            input
+                display: inline-block
+                width: 20%
+            &__add-button
+                @include font
+                padding-top: 40px
+                background: none
+                border: none
+                outline: none
+                cursor: pointer
+                color: gray
+                margin-bottom: 15px
+                &:hover
+                    color: black
+
+
+    // Таблица
     .table
+        $table-border-color: #DFE2E5
+        $table-odd-row-color: #F6F8FA
+        $table-hovered-color: #eceef0
+
+        @mixin table-fill
+            border-top: 1px solid $table-border-color
+            border-right: 1px solid $table-border-color
+            padding: 5px 10px
+            text-align: left
+
+        width: 100%
+
         border-spacing: 0
         border-left: 1px solid $table-border-color
         border-bottom: 1px solid $table-border-color
@@ -21,11 +56,43 @@ $table-odd-row-color: #F6F8FA
             &__row
                 &__fill
                     @include table-fill
+                    cursor: pointer
+                    user-select: none
 
         &__body
             &__row
+                cursor: pointer
+
                 &:nth-child(2n)
                     background: $table-odd-row-color
 
+                &:hover
+                    background: $table-hovered-color
+
                 &__fill
                     @include table-fill
+
+
+    // Блок с информацией
+    .information
+        @mixin information-fill
+            margin: 0px
+            margin-top: 5px
+
+        margin-top: 20px
+            
+        &__fill
+            @include information-fill
+
+        &__fills-wrapper
+            &__fill
+                @include information-fill
+
+            &__textarea
+                width: 100%
+                max-width: 800px
+                height: 100px
+
+                padding: 10px
+
+                resize: vertical

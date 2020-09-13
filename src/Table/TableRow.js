@@ -1,19 +1,14 @@
 import React from "react";
 
 class TalbeRow extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            row: {},
-        };
-    }
-
     render() {
         return (
-            <tr className="table__body__row">
-                <td className="table__body__row__fill">Поле1</td>
-                <td className="table__body__row__fill">Поле2</td>
-                <td className="table__body__row__fill">Поле3</td>
+            <tr className="table__body__row" onClick ={()=>this.props.onClick(this.props.row)}>
+                <td className="table__body__row__fill">{this.props.row.id}</td>
+                <td className="table__body__row__fill">{this.props.row.firstName}</td>
+                <td className="table__body__row__fill">{this.props.row.lastName}</td>
+                <td className="table__body__row__fill">{this.props.row.email}</td>
+                <td className="table__body__row__fill">{this.props.row.phone}</td>
             </tr>
         );
     }

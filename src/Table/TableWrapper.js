@@ -1,23 +1,25 @@
 import React from "react";
 import TableRow from "./TableRow";
-import TableHead from "./TableHead";
+import TalbeHeader from "./TalbeHeader";
 
 class TableWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { rows: [] };
-    }
-
     render() {
+        if (this.props.rows === undefined) return null;
+
         return (
             <table className="table">
                 <thead className="table__head">
-                    <TableHead></TableHead>
+                    <TalbeHeader rows={this.props.rows} setRows={this.props.setRows} />
                 </thead>
                 <tbody className="table__body">
-                    <TableRow></TableRow>
-                    <TableRow></TableRow>
-                    <TableRow></TableRow>
+                    {this.props.rows.map((item, index) => (
+                        <TableRow
+                            row={item}
+                            key={index}
+                            index={index}
+                            onClick={this.props.onRowClick}
+                        />
+                    ))}
                 </tbody>
                 <tfoot className="table__footer"></tfoot>
             </table>
