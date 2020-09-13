@@ -39,7 +39,7 @@ class TalbeHeader extends React.Component {
     }
 
     sortByName(name, isAscending) {
-        let sorted = [...this.props.rows];
+        let sorted = [...this.props.totalRows];
         if (!isAscending) {
             sorted.sort((a, b) => (a[name] > b[name] ? 1 : -1));
             this.setFill(name, true);
@@ -63,16 +63,10 @@ class TalbeHeader extends React.Component {
                         <th
                             key={index}
                             className="table__head__row__fill"
-                            onClick={() =>
-                                this.sortByName(item.name, item.isAscending)
-                            }
+                            onClick={() => this.sortByName(item.name, item.isAscending)}
                         >
                             {`${item.caption} ${
-                                item.isAscending
-                                    ? "▲"
-                                    : item.isAscending === undefined
-                                    ? " "
-                                    : "▼"
+                                item.isAscending ? "▲" : item.isAscending === undefined ? " " : "▼"
                             }`}
                         </th>
                     );

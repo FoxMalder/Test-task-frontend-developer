@@ -85,29 +85,53 @@ class AddNewRow extends React.Component {
                     >
                         <div className="add-wrapper__form__parameters">
                             <div className="add-wrapper__form__parameters__headers-wrapper">
-                                {this.fills.map((key) => (
-                                    <p
-                                        key={key}
-                                        className="add-wrapper__form__parameters__headers-wrapper__header"
-                                    >
-                                        {key}
-                                    </p>
-                                ))}
+                                <p className="add-wrapper__form__parameters__headers-wrapper__header"> ID </p>
+                                <p className="add-wrapper__form__parameters__headers-wrapper__header"> Имя </p>
+                                <p className="add-wrapper__form__parameters__headers-wrapper__header"> Фамилия </p>
+                                <p className="add-wrapper__form__parameters__headers-wrapper__header"> E-mail </p>
+                                <p className="add-wrapper__form__parameters__headers-wrapper__header"> Телефон </p>
                             </div>
                             <div className="add-wrapper__form__parameters__fills-wrapper">
-                                {this.fills.map((key) => (
-                                    <input
-                                        className="add-wrapper__form__parameters__fills-wrapper__fill"
-                                        key={key}
-                                        type="text"
-                                        value={this.state[key]}
-                                        onChange={(e) =>
-                                            this.setNewValue(e, key)
-                                        }
-                                        autoComplete="off"
-                                        required
-                                    />
-                                ))}
+                                <input
+                                    className="add-wrapper__form__parameters__fills-wrapper__fill"
+                                    type="number"
+                                    value={this.state.id}
+                                    onChange={(e) => this.setNewValue(e, 'id')}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <input
+                                    className="add-wrapper__form__parameters__fills-wrapper__fill"
+                                    type="text"
+                                    value={this.state.firstName}
+                                    onChange={(e) => this.setNewValue(e, 'firstName')}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <input
+                                    className="add-wrapper__form__parameters__fills-wrapper__fill"
+                                    type="text"
+                                    value={this.state.lastName}
+                                    onChange={(e) => this.setNewValue(e, 'lastName')}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <input
+                                    className="add-wrapper__form__parameters__fills-wrapper__fill"
+                                    type="email"
+                                    value={this.state.email}
+                                    onChange={(e) => this.setNewValue(e, 'email')}
+                                    autoComplete="off"
+                                    required
+                                />
+                                <input
+                                    className="add-wrapper__form__parameters__fills-wrapper__fill"
+                                    type="text"
+                                    value={this.state.phone}
+                                    onChange={(e) => this.setNewValue(e, 'phone')}
+                                    autoComplete="off"
+                                    required
+                                />
                             </div>
                         </div>
                         <div className="add-wrapper__form__buttons-wrapper">

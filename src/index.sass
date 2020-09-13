@@ -18,6 +18,19 @@ $table-hovered-color: #eceef0
     margin: 0px
     margin-top: 5px
 
+@mixin button
+    padding: 0
+    @include font
+    background:  none
+    border: none
+    cursor: pointer
+    color: gray
+    outline: none
+    margin: 0
+
+    &:hover
+        color: black
+
 *
     box-sizing: border-box
     
@@ -26,43 +39,29 @@ $table-hovered-color: #eceef0
 // Главный контейнер
 .wrapper
     @include font
-
     max-width: 1040px
     margin: 0 auto
     padding: 20px
 
     &__header
         margin: 0
+        position: relative
+        bottom: -25px
+        display: inline
+
+
 
     // Добавлеение нового элемента
     .add-wrapper
-        margin-bottom: 20px
+        margin-bottom: 10px
+        text-align: right
         
         &__open-button
-            padding: 0
+            @include button
             margin-bottom: 10px
-            @include font
-            background:  none
-            border: none
-            cursor: pointer
-            color: gray
-            outline: none
-
-            &:hover
-                color: black
 
             &--is-not-opened
-                padding: 0
-                margin: 0
-                @include font
-                background:  none
-                border: none
-                cursor: pointer
-                color: gray
-                outline: none
-
-                &:hover
-                    color: black
+                @include button
 
                 
         &__form
@@ -95,40 +94,28 @@ $table-hovered-color: #eceef0
                         @include font
                         @include table-fill
                         width: 100%
+
+                        &:required
+                            &:valid
+                                background: lighten(green, 70)
                         
             &__buttons-wrapper
                 &__clear-button
-                    padding: 0
-                    margin-top: 10px
-                    @include font
-                    background:  none
-                    border: none
-                    cursor: pointer
-                    color: gray
-                    outline: none
+                    @include button
                     margin-right: 30px
                     
                     &:hover
                         color: #e60000
 
                 &__add-button
-                    padding: 0
+                    @include button
                     margin-top: 10px
-                    @include font
-                    background:  none
-                    border: none
-                    cursor: pointer
-                    color: gray
-                    outline: none
-                    
-                    &:hover
-                        color: black
 
 
 
     // Таблица
     .table
-        margin-bottom: 20px
+        margin-bottom: 10px
         width: 100%
 
         border-spacing: 0
@@ -156,6 +143,42 @@ $table-hovered-color: #eceef0
                     @include table-fill
 
 
+
+    // Страницы таблицы
+    .page-navigation
+        width: 100%
+        margin-bottom: 20px
+        display: flex
+        justify-content: space-between
+        align-items: baseline
+
+        &__current-page
+            margin: 0
+
+        &__pages-wrapper
+            display: flex
+            align-items: baseline
+
+            &__navigation-button
+                @include button
+                margin-bottom: 10px
+                margin-left: 10px
+                margin-right: 10px
+
+                &:hover
+                    color: black
+
+            &__page-number
+                @include button
+                margin-bottom: 10px
+                margin-left: 10px
+                margin-right: 10px
+
+                &:hover
+                    color: black
+                
+
+    
     // Блок с информацией
     .information
         margin-bottom: 20px
