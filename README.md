@@ -40,3 +40,19 @@
 ### Внешний вид
 
 ![Screenshot](Screenshot.png)
+
+### Инструменты
+
+Для исполнения этого задания были использованы следующие инструменты:
+
+- NPM
+- JSX
+- Babel
+- React
+- SASS
+
+### Тестирование
+
+Для тестирования работы приложения были использованы следующие инструменты:
+
+- [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=ru)
