@@ -20,7 +20,7 @@ class App extends React.Component {
             selectedRow: undefined,
 
             currentRows: undefined,
-            rowsPerPage: 10,
+            rowsPerPage: 50, // Количество записей на странице
             currentPage: 1,
 
             isLoading: true,
