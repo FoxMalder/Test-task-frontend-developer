@@ -7,6 +7,7 @@ class TableWrapper extends React.Component {
         return (
             <table className="table">
                 <thead className="table__head">
+                    {/* Отображаем заголовки столбцов */}
                     {this.props.currentRows.length !== 0 ? (
                         <TalbeHeader
                             setBackgroundLoading={this.props.setBackgroundLoading}
@@ -18,6 +19,7 @@ class TableWrapper extends React.Component {
                     ) : null}
                 </thead>
                 <tbody className="table__body">
+                    {/* Отображаем записи */}
                     {this.props.currentRows.map((item, index) => (
                         <TableRow
                             row={item}
@@ -27,6 +29,7 @@ class TableWrapper extends React.Component {
                             setBackgroundLoading={this.props.setBackgroundLoading}
                         />
                     ))}
+                    {/* Если нет записей, то выводим соответствующее сообщение */}
                     {this.props.currentRows.length === 0 ? (
                         <tr className="table__body__row table__body__row--unable">
                             <td colSpan="5" className="table__body__row__no-to-show">

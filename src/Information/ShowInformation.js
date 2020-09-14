@@ -2,10 +2,14 @@ import React from "react";
 
 class ShowInformation extends React.Component {
     render() {
-        if (this.props.selectedRow === undefined) return null;
+        // Если строка не выбрана пользователем, то скрываем форму
+        if (this.props.selectedRow === undefined) {
+            return null;
+        }
 
         return (
             <div className="information">
+                <hr />
                 <p className="information__fill">
                     Выбран пользователь:{" "}
                     <b>{`${this.props.selectedRow.firstName} ${this.props.selectedRow.lastName}`}</b>

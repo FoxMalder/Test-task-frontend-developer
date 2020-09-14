@@ -13,11 +13,15 @@ class Search extends Component {
         this.onSubmitForm = this.onSubmitForm.bind(this);
     }
 
+    // Изменение текста для фильтрации
     queryChange(event) {
         this.setState({ searchQuery: event.target.value });
     }
 
+    // Фильтрация значений
     filterRows() {
+
+        // Если запрос пуст, то отменяем фильтрацию
         if (this.state.searchQuery === "") {
             this.props.setFiltredRows(this.props.totalRows);
             return;
@@ -39,6 +43,7 @@ class Search extends Component {
         this.props.setFiltredRows(array);
     }
 
+    // Событие при подтверждении формы
     onSubmitForm(event) {
         event.preventDefault();
 

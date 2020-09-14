@@ -38,6 +38,13 @@ $table-hovered-color: #eceef0
    100%
        transform: rotate(360deg) 
 
+body
+    margin: 0
+    padding: 0
+
+hr
+    border: none
+    border-top: 1px solid $table-border-color
 *
     box-sizing: border-box
     
@@ -71,6 +78,13 @@ $table-hovered-color: #eceef0
             animation: loading 1s linear infinite
             width: 25px
             height: 25px
+            margin-left: 10px
+
+        &__repeat
+            @include button
+
+        &__all-rows-count
+            margin: 0
             margin-left: 10px
 
     // Добавлеение нового элемента
@@ -223,6 +237,7 @@ $table-hovered-color: #eceef0
             &__current-page
                 margin: 0
                 margin-right: 10px
+                margin-bottom: 10px
 
             &__navigation-button
                 @include button
@@ -238,11 +253,11 @@ $table-hovered-color: #eceef0
 
             &__caption
                 margin: 0
-                margin-right: 10px
+                margin-right: 0px
 
             &__page-dots
                 @include button
-                margin-left: 10px
+                margin-left: 20px
 
                 &.left
                     margin-right: 10px
@@ -254,8 +269,7 @@ $table-hovered-color: #eceef0
             &__page-number
                 @include button
                 margin-bottom: 10px
-                margin-left: 10px
-                margin-right: 10px
+                margin-left: 20px
                 user-select: none
 
                 &:hover

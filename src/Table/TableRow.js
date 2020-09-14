@@ -7,6 +7,8 @@ class TalbeRow extends React.Component {
         this.onClick = this.onClick.bind(this);
     }
 
+    // Событие при нажатии на строчку с записью
+    //      row — значения строчки
     onClick(row) {
         this.props.setBackgroundLoading(true);
         setTimeout(() => {
@@ -17,10 +19,7 @@ class TalbeRow extends React.Component {
 
     render() {
         return (
-            <tr
-                className="table__body__row"
-                onClick={this.onClick.bind(this, this.props.row)}
-            >
+            <tr className="table__body__row" onClick={this.onClick.bind(this, this.props.row)}>
                 <td className="table__body__row__fill">{this.props.row.id}</td>
                 <td className="table__body__row__fill">{this.props.row.firstName}</td>
                 <td className="table__body__row__fill">{this.props.row.lastName}</td>

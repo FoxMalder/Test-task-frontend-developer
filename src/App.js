@@ -11,6 +11,7 @@ class App extends React.Component {
     constructor(props) {
         super();
 
+        // Адрес запроса, для получения данных
         this.queryURL = `http://www.filltext.com/?rows=1000&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D`;
 
         this.state = {
@@ -19,12 +20,14 @@ class App extends React.Component {
             selectedRow: undefined,
 
             currentRows: undefined,
-            rowsPerPage: 50,
+            rowsPerPage: 10,
             currentPage: 1,
 
             isLoading: true,
             error: false,
             isBackgroundLoading: false,
+
+            allRows: 0,
         };
 
         this.setSelectedRow = this.setSelectedRow.bind(this);
@@ -36,10 +39,16 @@ class App extends React.Component {
         this.onClickRepeat = this.onClickRepeat.bind(this);
     }
 
+    componentDidMount() {
+        this.getDataFromServer(this.queryURL);
+    }
+
     setBackgroundLoading(state) {
         this.setState({ isBackgroundLoading: state });
     }
 
+    // Получение данных с сервера
+    //      queryURL — get-запрос серверу
     getDataFromServer(queryURL) {
         fetch(this.queryURL)
             .then((res) => res.json())
@@ -65,6 +74,7 @@ class App extends React.Component {
                             this.state.rowsPerPage,
                             result
                         ),
+                        allRows: result.length,
                     });
                 },
 
@@ -78,6 +88,7 @@ class App extends React.Component {
             );
     }
 
+    // Функция при нажатии на повторение запроса
     onClickRepeat() {
         this.setState({ isLoading: true, error: false });
 
@@ -86,10 +97,10 @@ class App extends React.Component {
         }, 0);
     }
 
-    componentDidMount() {
-        this.getDataFromServer(this.queryURL);
-    }
-
+    // Определение среза страницы
+    //      currentPage — текущая выбранная страница для отображения
+    //      rowsPerPage — количество записей на страницу
+    //      totalRows — массив всех записей
     countCurrentRowsOnPage(currentPage, rowsPerPage, totalRows) {
         const indexOfLastRow = currentPage * rowsPerPage;
         const indexOfFirstRow = indexOfLastRow - rowsPerPage;
@@ -98,6 +109,8 @@ class App extends React.Component {
         return currentRows;
     }
 
+    // Установка массива всех записей
+    //      _rows — новое значение для массива
     setTotalRows(_rows) {
         this.setState({
             totalRows: _rows,
@@ -109,6 +122,8 @@ class App extends React.Component {
         });
     }
 
+    // Установка массива отфильтрованных страниц
+    //      _filtredRows — новое значение для массива
     setFiltredRows(_filtredRows) {
         this.setState({
             filtredRows: _filtredRows,
@@ -118,9 +133,12 @@ class App extends React.Component {
                 this.state.rowsPerPage,
                 _filtredRows
             ),
+            allRows: _filtredRows.length,
         });
     }
 
+    // Установка текущей страницы
+    //      newPageNumber — новое значение для текущей страницы
     setActivePage(newPageNumber) {
         this.setState({
             currentRows: this.countCurrentRowsOnPage(
@@ -132,22 +150,27 @@ class App extends React.Component {
         });
     }
 
+    // Установка выбранной пользователем записи для отображение в блоке под таблицей
+    //      _row — обеъкт, содержащий в себе значения выбранной записи
     setSelectedRow(_row) {
         this.setState({ selectedRow: _row });
     }
 
     render() {
+        // Отображение сообщения о загрузке
         if (this.state.isLoading) {
             return (
                 <div className="wrapper">
                     <div className="wrapper__header">
                         <h1>Таблица</h1>
                         <Loading show={this.state.isLoading} loadingImage={loadingImage} />
+                        <p className="wrapper__header__all-rows-count">Получение записей</p>
                     </div>
                 </div>
             );
         }
 
+        // Отображение сообщение об ошибке
         if (this.state.error) {
             return (
                 <div className="wrapper">
@@ -158,12 +181,15 @@ class App extends React.Component {
                             <br />
                             <b>Текст ошибки:</b> <b className="red">{this.state.error}</b>
                         </p>
-                        <button onClick={this.onClickRepeat}>Повторить</button>
+                        <button onClick={this.onClickRepeat} className="wrapper__header__repeat">
+                            Повторить запрос{" "}
+                        </button>
                     </div>
                 </div>
             );
         }
 
+        // Отображение интерфейса
         return (
             <div className="wrapper">
                 <div className="wrapper__header">
@@ -172,12 +198,16 @@ class App extends React.Component {
                         show={this.state.isLoading || this.state.isBackgroundLoading}
                         loadingImage={loadingImage}
                     />
+                    <p className="wrapper__header__all-rows-count">
+                        Всего записей: {this.state.allRows}
+                    </p>
                 </div>
                 <AddNewRow
                     totalRows={this.state.totalRows}
                     filtredRows={this.state.filtredRows}
                     setTotalRows={this.setTotalRows}
                     setFiltredRows={this.setFiltredRows}
+                    setBackgroundLoading={this.setBackgroundLoading}
                 />
                 <Search
                     totalRows={this.state.totalRows}
@@ -187,7 +217,7 @@ class App extends React.Component {
                 />
                 <Pagination
                     currentPage={this.state.currentPage}
-                    totalRows={this.state.filtredRows}
+                    rows={this.state.filtredRows}
                     rowsPerPage={this.state.rowsPerPage}
                     setActivePage={this.setActivePage}
                     setBackgroundLoading={this.setBackgroundLoading}
@@ -203,7 +233,7 @@ class App extends React.Component {
                 />
                 <Pagination
                     currentPage={this.state.currentPage}
-                    totalRows={this.state.filtredRows}
+                    rows={this.state.filtredRows}
                     rowsPerPage={this.state.rowsPerPage}
                     setActivePage={this.setActivePage}
                     setBackgroundLoading={this.setBackgroundLoading}

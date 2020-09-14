@@ -2,9 +2,10 @@ import React from "react";
 
 class TalbeHeader extends React.Component {
     constructor(props) {
-        super(props);
+        super();
 
         this.state = {
+            // Заголовки полей записей таболицы
             headers: [
                 { name: "id", isAscending: undefined },
                 { name: "firstName", isAscending: undefined },
@@ -17,6 +18,8 @@ class TalbeHeader extends React.Component {
         this.onHeaderClick = this.onHeaderClick.bind(this);
     }
 
+    // Сброс внешнего вида каждого столбца
+    //      Имя столбца внешний вид которого будет не затронут
     resetHeaders(name) {
         this.setState({
             headers: this.state.headers.map((item) => {
@@ -28,6 +31,9 @@ class TalbeHeader extends React.Component {
         });
     }
 
+    // Установка значения сортировки для столбца
+    //      name — имя столбца
+    //      isAscending — тип сортировки сортировки
     setFill(name, isAscending) {
         this.resetHeaders(name);
         this.setState({
@@ -40,6 +46,9 @@ class TalbeHeader extends React.Component {
         });
     }
 
+    // Сортировка по имени столбца
+    //      name — имя столбца
+    //      isAscending — тип сортировки (true — по возрастанию, false — по убыванию)
     sortByName(name, isAscending) {
         let sortedTotalRows = this.props.totalRows;
         let sortedFiltredRows = this.props.filtredRows;
@@ -58,6 +67,9 @@ class TalbeHeader extends React.Component {
         this.props.setFiltredRows(sortedFiltredRows);
     }
 
+    // Событие при нажатии на имя столбца
+    //      fillName — имя заголовка
+    //      isAscending — тип сортировки (true — по возрастанию, false — по убыванию)
     onHeaderClick(fillName, isAscending) {
         this.props.setBackgroundLoading(true);
 
@@ -75,10 +87,9 @@ class TalbeHeader extends React.Component {
                         <th
                             key={index}
                             className="table__head__row__fill"
-                            onClick={() => {
-                                this.onHeaderClick(item.name, item.isAscending);
-                            }}
+                            onClick={this.onHeaderClick.bind(this, item.name, item.isAscending)}
                         >
+                            {/* Определяем значок для сортировки */}
                             {`${item.name} ${
                                 item.isAscending ? "▲" : item.isAscending === undefined ? " " : "▼"
                             }`}
