@@ -27,9 +27,16 @@ $table-hovered-color: #eceef0
     color: gray
     outline: none
     margin: 0
+    user-select: none
 
     &:hover
         color: black
+
+@keyframes loading
+   0%
+       transform: rotate(0deg)
+   100%
+       transform: rotate(360deg) 
 
 *
     box-sizing: border-box
@@ -47,14 +54,26 @@ $table-hovered-color: #eceef0
         margin: 0
         position: relative
         bottom: -25px
-        display: inline
+        display: flex
+        align-items: baseline
+        width: 50%
 
+        h1
+            margin: 0
 
+        &.error
+            display: block
+
+        .loading
+            animation: loading 1s linear infinite
+            width: 25px
+            height: 25px
+            margin-left: 10px
 
     // Добавлеение нового элемента
     .add-wrapper
-        margin-bottom: 10px
         text-align: right
+        margin-bottom: 20px
         
         &__open-button
             @include button
@@ -112,6 +131,37 @@ $table-hovered-color: #eceef0
                     margin-top: 10px
 
 
+    //Поиск
+    .search
+        margin-bottom: 20px
+        &__form
+            display: flex
+            border-bottom: 1px solid $table-border-color
+            border-left: 1px solid $table-border-color
+
+            &__input
+                @include font
+                width: 100%
+                display: block
+                border: none
+                border-top: 1px solid $table-border-color
+                border-right: 1px solid $table-border-color
+                padding: 5px 10px
+                outline: none
+
+            &__submit
+                display: block
+                @include font
+                border: none
+                border-top: 1px solid $table-border-color
+                border-right: 1px solid $table-border-color
+                background: none
+                padding: 5px 10px
+                cursor: pointer
+
+                &:hover
+                    background: $table-hovered-color
+
 
     // Таблица
     .table
@@ -133,6 +183,12 @@ $table-hovered-color: #eceef0
             &__row
                 cursor: pointer
 
+                &.table__body__row--unable
+                    cursor: default
+
+                    &:hover
+                        background: none
+
                 &:nth-child(2n)
                     background: $table-odd-row-color
 
@@ -141,6 +197,11 @@ $table-hovered-color: #eceef0
 
                 &__fill
                     @include table-fill
+
+                &__no-to-show
+                    @include table-fill
+                    text-align: Center
+                    background: lighten(red, 45)
 
 
 
@@ -152,27 +213,47 @@ $table-hovered-color: #eceef0
         justify-content: space-between
         align-items: baseline
 
-        &__current-page
-            margin: 0
+        &__current-page-wrapper
+            display: flex
+            align-items: baseline
+
+            &__current-page
+                margin: 0
+                margin-right: 10px
+
+            &__navigation-button
+                @include button
+                margin-bottom: 10px
+                margin-right: 10px
+
+                &:hover
+                    color: black
 
         &__pages-wrapper
             display: flex
             align-items: baseline
 
-            &__navigation-button
-                @include button
-                margin-bottom: 10px
-                margin-left: 10px
+            &__caption
+                margin: 0
                 margin-right: 10px
+
+            &__page-dots
+                @include button
+                margin-left: 10px
+
+                &.left
+                    margin-right: 10px
 
                 &:hover
                     color: black
+
 
             &__page-number
                 @include button
                 margin-bottom: 10px
                 margin-left: 10px
                 margin-right: 10px
+                user-select: none
 
                 &:hover
                     color: black

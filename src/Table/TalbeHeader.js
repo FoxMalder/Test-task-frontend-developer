@@ -6,13 +6,15 @@ class TalbeHeader extends React.Component {
 
         this.state = {
             headers: [
-                { name: "id", caption: "ID", isAscending: undefined },
-                { name: "firstName", caption: "Имя", isAscending: undefined },
-                { name: "lastName", caption: "Фамилия", isAscending: undefined },
-                { name: "email", caption: "Эл. почта", isAscending: undefined },
-                { name: "phone", caption: "Телефон", isAscending: undefined },
+                { name: "id", isAscending: undefined },
+                { name: "firstName", isAscending: undefined },
+                { name: "lastName", isAscending: undefined },
+                { name: "email", isAscending: undefined },
+                { name: "phone", isAscending: undefined },
             ],
         };
+
+        this.onHeaderClick = this.onHeaderClick.bind(this);
     }
 
     resetHeaders(name) {
@@ -39,23 +41,33 @@ class TalbeHeader extends React.Component {
     }
 
     sortByName(name, isAscending) {
-        let sorted = [...this.props.totalRows];
+        let sortedTotalRows = this.props.totalRows;
+        let sortedFiltredRows = this.props.filtredRows;
+
         if (!isAscending) {
-            sorted.sort((a, b) => (a[name] > b[name] ? 1 : -1));
+            sortedTotalRows.sort((a, b) => (a[name] > b[name] ? 1 : -1));
+            sortedFiltredRows.sort((a, b) => (a[name] > b[name] ? 1 : -1));
             this.setFill(name, true);
         } else {
-            sorted.sort((a, b) => (a[name] > b[name] ? -1 : 1));
+            sortedTotalRows.sort((a, b) => (a[name] > b[name] ? -1 : 1));
+            sortedFiltredRows.sort((a, b) => (a[name] > b[name] ? -1 : 1));
             this.setFill(name, false);
         }
 
-        this.props.setRows(sorted);
+        this.props.setRows(sortedTotalRows);
+        this.props.setFiltredRows(sortedFiltredRows);
+    }
+
+    onHeaderClick(fillName, isAscending) {
+        this.props.setBackgroundLoading(true);
+
+        setTimeout(() => {
+            this.sortByName(fillName, isAscending);
+            this.props.setBackgroundLoading(false);
+        }, 0);
     }
 
     render() {
-        if (this.state.isLoading) {
-            return null;
-        }
-
         return (
             <tr className="table__head__row">
                 {this.state.headers.map((item, index) => {
@@ -63,9 +75,11 @@ class TalbeHeader extends React.Component {
                         <th
                             key={index}
                             className="table__head__row__fill"
-                            onClick={() => this.sortByName(item.name, item.isAscending)}
+                            onClick={() => {
+                                this.onHeaderClick(item.name, item.isAscending);
+                            }}
                         >
-                            {`${item.caption} ${
+                            {`${item.name} ${
                                 item.isAscending ? "▲" : item.isAscending === undefined ? " " : "▼"
                             }`}
                         </th>

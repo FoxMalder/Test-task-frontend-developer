@@ -30,9 +30,9 @@ class AddNewRow extends React.Component {
         };
         let description = "Не указано";
 
-        this.props.setRows([
+        this.props.setTotalRows([
             {
-                id: this.state.id,
+                id: +this.state.id,
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.email,
@@ -40,8 +40,21 @@ class AddNewRow extends React.Component {
                 address: address,
                 description: description,
             },
-            ...this.props.rows,
+            ...this.props.totalRows,
         ]);
+
+        this.props.setFiltredRows([
+            {
+                id: +this.state.id,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                phone: this.state.phone,
+                address: address,
+                description: description,
+            },
+            ...this.props.filtredRows
+        ])
 
         this.setState(this.defaultValue);
 
