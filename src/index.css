@@ -54,6 +54,10 @@
   display: block;
 }
 
+.wrapper__header .red {
+  color: #e60000;
+}
+
 .wrapper__header .loading {
   -webkit-animation: loading 1s linear infinite;
           animation: loading 1s linear infinite;
@@ -322,7 +326,7 @@
 
 .wrapper .page-navigation {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -446,6 +450,7 @@
 }
 
 .wrapper .information {
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 

@@ -24,6 +24,7 @@ class TableWrapper extends React.Component {
                             key={index}
                             index={index}
                             onClick={this.props.onRowClick}
+                            setBackgroundLoading={this.props.setBackgroundLoading}
                         />
                     ))}
                     {this.props.currentRows.length === 0 ? (

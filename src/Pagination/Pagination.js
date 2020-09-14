@@ -1,6 +1,22 @@
 import React from "react";
 
 class Pagination extends React.Component {
+
+    constructor () {
+        super()
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(page) {
+        this.props.setBackgroundLoading(true);
+
+        setTimeout(() => {
+            this.props.setActivePage(page);
+            this.props.setBackgroundLoading(false);
+        }, 0);
+    }
+
     render() {
         const pageNubersPerPage = 7;
         const minPage = 1;
@@ -28,7 +44,7 @@ class Pagination extends React.Component {
                     {this.props.currentPage !== minPage ? (
                         <button
                             className="page-navigation__current-page-wrapper__navigation-button"
-                            onClick={this.props.setActivePage.bind(
+                            onClick={this.onClick.bind(
                                 this,
                                 this.props.currentPage - 1
                             )}
@@ -44,7 +60,7 @@ class Pagination extends React.Component {
                     {this.props.currentPage !== maxPage ? (
                         <button
                             className="page-navigation__current-page-wrapper__navigation-button"
-                            onClick={this.props.setActivePage.bind(
+                            onClick={this.onClick.bind(
                                 this,
                                 this.props.currentPage + 1
                             )}
@@ -61,7 +77,7 @@ class Pagination extends React.Component {
                         maxPage > pageNubersPerPage ? (
                             <p
                                 className="page-navigation__pages-wrapper__page-dots"
-                                onClick={this.props.setActivePage.bind(this, 1)}
+                                onClick={this.onClick.bind(this, 1)}
                             >
                                 ...
                             </p>
@@ -72,7 +88,7 @@ class Pagination extends React.Component {
                                 <p
                                     key={item}
                                     className="page-navigation__pages-wrapper__page-number"
-                                    onClick={this.props.setActivePage.bind(this, item)}
+                                    onClick={this.onClick.bind(this, item)}
                                 >
                                     {item}
                                 </p>
@@ -83,7 +99,7 @@ class Pagination extends React.Component {
                         maxPage > pageNubersPerPage ? (
                             <p
                                 className="page-navigation__pages-wrapper__page-dots"
-                                onClick={this.props.setActivePage.bind(this, maxPage)}
+                                onClick={this.onClick.bind(this, maxPage)}
                             >
                                 ...
                             </p>

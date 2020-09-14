@@ -11,7 +11,7 @@ class App extends React.Component {
     constructor(props) {
         super();
 
-        this.queryURL = `http://www.filltext.com/?rows=500&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D`;
+        this.queryURL = `http://www.filltext.com/?rows=1000&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D`;
 
         this.state = {
             totalRows: undefined,
@@ -19,10 +19,11 @@ class App extends React.Component {
             selectedRow: undefined,
 
             currentRows: undefined,
-            rowsPerPage: 10,
+            rowsPerPage: 50,
             currentPage: 1,
 
             isLoading: true,
+            error: false,
             isBackgroundLoading: false,
         };
 
@@ -31,13 +32,15 @@ class App extends React.Component {
         this.setTotalRows = this.setTotalRows.bind(this);
         this.setFiltredRows = this.setFiltredRows.bind(this);
         this.setBackgroundLoading = this.setBackgroundLoading.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
+        this.onClickRepeat = this.onClickRepeat.bind(this);
     }
 
     setBackgroundLoading(state) {
         this.setState({ isBackgroundLoading: state });
     }
 
-    componentDidMount() {
+    getDataFromServer(queryURL) {
         fetch(this.queryURL)
             .then((res) => res.json())
             .then(
@@ -73,6 +76,18 @@ class App extends React.Component {
                     console.log(error);
                 }
             );
+    }
+
+    onClickRepeat() {
+        this.setState({ isLoading: true, error: false });
+
+        setTimeout(() => {
+            this.getDataFromServer(this.queryURL);
+        }, 0);
+    }
+
+    componentDidMount() {
+        this.getDataFromServer(this.queryURL);
     }
 
     countCurrentRowsOnPage(currentPage, rowsPerPage, totalRows) {
@@ -141,12 +156,14 @@ class App extends React.Component {
                         <p>
                             В результате выполнения запроса произошла ошибка.
                             <br />
-                            Текст ошибки: <b>{this.state.error}</b>
+                            <b>Текст ошибки:</b> <b className="red">{this.state.error}</b>
                         </p>
+                        <button onClick={this.onClickRepeat}>Повторить</button>
                     </div>
                 </div>
             );
         }
+
         return (
             <div className="wrapper">
                 <div className="wrapper__header">
@@ -168,6 +185,13 @@ class App extends React.Component {
                     setFiltredRows={this.setFiltredRows}
                     setBackgroundLoading={this.setBackgroundLoading}
                 />
+                <Pagination
+                    currentPage={this.state.currentPage}
+                    totalRows={this.state.filtredRows}
+                    rowsPerPage={this.state.rowsPerPage}
+                    setActivePage={this.setActivePage}
+                    setBackgroundLoading={this.setBackgroundLoading}
+                />
                 <TableWrapper
                     totalRows={this.state.totalRows}
                     filtredRows={this.state.filtredRows}
@@ -183,10 +207,6 @@ class App extends React.Component {
                     rowsPerPage={this.state.rowsPerPage}
                     setActivePage={this.setActivePage}
                     setBackgroundLoading={this.setBackgroundLoading}
-                />
-                <Loading
-                    show={this.state.isLoading || this.state.isBackgroundLoading}
-                    loadingImage={loadingImage}
                 />
                 <ShowInformation selectedRow={this.state.selectedRow} />
             </div>

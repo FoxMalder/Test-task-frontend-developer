@@ -64,6 +64,9 @@ $table-hovered-color: #eceef0
         &.error
             display: block
 
+        .red
+            color: darken(red, 5)
+
         .loading
             animation: loading 1s linear infinite
             width: 25px
@@ -208,7 +211,7 @@ $table-hovered-color: #eceef0
     // Страницы таблицы
     .page-navigation
         width: 100%
-        margin-bottom: 20px
+        margin-bottom: 0px
         display: flex
         justify-content: space-between
         align-items: baseline
@@ -262,6 +265,7 @@ $table-hovered-color: #eceef0
     
     // Блок с информацией
     .information
+        margin-top: 10px
         margin-bottom: 20px
             
         &__fill
