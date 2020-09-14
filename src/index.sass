@@ -38,6 +38,19 @@ $table-hovered-color: #eceef0
    100%
        transform: rotate(360deg) 
 
+@mixin beauty-button
+    @include font
+    border: none
+    border: 1px solid $table-border-color
+    background: none
+    padding: 5px 10px
+    cursor: pointer
+    outline: none
+
+    &:hover
+        background: $table-hovered-color
+           
+
 body
     margin: 0
     padding: 0
@@ -56,6 +69,28 @@ hr
     max-width: 1040px
     margin: 0 auto
     padding: 20px
+
+
+    // Приветствие
+    .hello
+        &__header
+            margin: 0
+            margin-bottom: 10px
+
+        &__paragraph
+            margin-bottom: 10px
+            margin-top: 0px
+
+        &__select-data-type
+            margin-top: 20px
+            
+            &__paragraph
+                margin-bottom: 10px
+
+            &__button
+                @include beauty-button
+                margin-right: 20px
+
 
     &__header
         margin: 0
@@ -167,14 +202,9 @@ hr
                 outline: none
 
             &__submit
-                display: block
-                @include font
-                border: none
-                border-top: 1px solid $table-border-color
-                border-right: 1px solid $table-border-color
-                background: none
-                padding: 5px 10px
-                cursor: pointer
+                @include beauty-button
+                border-bottom: none 
+                border-left: none 
 
                 &:hover
                     background: $table-hovered-color

@@ -55,6 +55,10 @@ class Pagination extends React.Component {
             this.indexOfFirstNumberOfPage = this.indexOfLastNumberOfPage - this.pageNubersPerPage;
         }
 
+        if(_props.currentPage > this.maxPage) {
+            _props.setActivePage(this.maxPage);
+        }
+
         // Установка отображаемых страниц на текущей странице
         this.currentPageNumbers = totalPageNumbers.slice(
             this.indexOfFirstNumberOfPage,

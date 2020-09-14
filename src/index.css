@@ -43,6 +43,40 @@ hr {
   padding: 20px;
 }
 
+.wrapper .hello__header {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.wrapper .hello__paragraph {
+  margin-bottom: 10px;
+  margin-top: 0px;
+}
+
+.wrapper .hello__select-data-type {
+  margin-top: 20px;
+}
+
+.wrapper .hello__select-data-type__paragraph {
+  margin-bottom: 10px;
+}
+
+.wrapper .hello__select-data-type__button {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12pt;
+  border: none;
+  border: 1px solid #DFE2E5;
+  background: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  margin-right: 20px;
+}
+
+.wrapper .hello__select-data-type__button:hover {
+  background: #eceef0;
+}
+
 .wrapper__header {
   margin: 0;
   position: relative;
@@ -282,15 +316,20 @@ hr {
 }
 
 .wrapper .search__form__submit {
-  display: block;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12pt;
   border: none;
-  border-top: 1px solid #DFE2E5;
-  border-right: 1px solid #DFE2E5;
+  border: 1px solid #DFE2E5;
   background: none;
   padding: 5px 10px;
   cursor: pointer;
+  outline: none;
+  border-bottom: none;
+  border-left: none;
+}
+
+.wrapper .search__form__submit:hover {
+  background: #eceef0;
 }
 
 .wrapper .search__form__submit:hover {
