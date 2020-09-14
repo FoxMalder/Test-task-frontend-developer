@@ -38,15 +38,10 @@ class App extends React.Component {
         this.setTotalRows = this.setTotalRows.bind(this);
         this.setFiltredRows = this.setFiltredRows.bind(this);
         this.setBackgroundLoading = this.setBackgroundLoading.bind(this);
-        this.componentDidMount = this.componentDidMount.bind(this);
         this.onClickRepeat = this.onClickRepeat.bind(this);
 
         this.setBigDataQuery = this.setBigDataQuery.bind(this);
         this.setLittleDataQuery = this.setLittleDataQuery.bind(this);
-    }
-
-    componentDidMount() {
-        // this.getDataFromServer(this.queryURL);
     }
 
     setBackgroundLoading(state) {
@@ -54,11 +49,13 @@ class App extends React.Component {
     }
 
     setBigDataQuery() {
+        this.queryURL = this.bigDataQuery;
         this.setState({ isDataTypeSelected: true });
         this.getDataFromServer(this.bigDataQuery);
     }
 
     setLittleDataQuery() {
+        this.queryURL = this.littleDataQuery;
         this.setState({ isDataTypeSelected: true });
         this.getDataFromServer(this.littleDataQuery);
     }
