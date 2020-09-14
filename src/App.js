@@ -26,6 +26,7 @@ class App extends React.Component {
             isLoading: true,
             error: false,
             isBackgroundLoading: false,
+            isDataTypeSelected: false,
 
             allRows: 0,
         };
@@ -157,6 +158,22 @@ class App extends React.Component {
     }
 
     render() {
+        if (!this.state.isDataTypeSelected) {
+            return (
+                <div className="wrapper">
+                    <div className="hello">
+                        <h1>Тестовое задание на позицию frontend разработчика</h1>
+                        <p>
+                            Выполнил: <b>Шамшурин Михаил</b>
+                        </p>
+                        <p>Выберите тип данных:</p>
+                        <button>Маленький объем данных</button>
+                        <button>Большой объем данных берется по ссылке</button>
+                    </div>
+                </div>
+            );
+        }
+
         // Отображение сообщения о загрузке
         if (this.state.isLoading) {
             return (
